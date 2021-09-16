@@ -2,6 +2,11 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
+// import { connect } from 'react-redux';
+// import {
+//   toggleCompleted,
+//   getVisibleContacts,
+// } from '../../redux/phonebook/phonebook-actions';
 
 const ContactList = ({ contacts, onDeleteContact, onToggleCompleted }) => (
   <ul className={s.list}>
@@ -33,5 +38,18 @@ ContactList.propTypes = {
   onDeleteContact: PropTypes.func.isRequired,
   onToggleCompleted: PropTypes.func.isRequired,
 };
+
+// const mapDispatchToProps = dispatch => ({
+//   onToggleCompleted: contactId => dispatch(toggleCompleted(contactId)),
+//   contacts: dispatch(getVisibleContacts()),
+// });
+
+// const mapStateToProps = state => {
+//   return {
+//     contacts: state,
+//   };
+// };
+
+// export default connect(null, mapDispatchToProps)(ContactList);
 
 export default ContactList;
