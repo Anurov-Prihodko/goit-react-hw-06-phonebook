@@ -18,19 +18,24 @@ const addContact = (name, number) => ({
   },
 });
 
-// const toggleCompleted = contactId => ({
-//   type: TOGGLE_COMPLETED,
-//   payload: contactId,
-// });
+const deleteContact = contactId => ({
+  type: DELETE,
+  payload: contactId,
+});
 
-export { addContact };
+const changeFilter = value => ({
+  type: CHANGE_FILTER,
+  payload: value,
+});
 
 // const getVisibleContacts = () => ({
 //   type: GET_VISIBLE_CONTACTS,
 //   payload: '',
 // });
 
-// const deleteContact = contactId => ({
-//   type: DELETE,
+// const toggleCompleted = contactId => ({
+//   type: TOGGLE_COMPLETED,
 //   payload: contactId,
 // });
+
+export { addContact, deleteContact, changeFilter };

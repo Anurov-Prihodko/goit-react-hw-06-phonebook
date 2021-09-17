@@ -20,11 +20,24 @@ const contactsArray = [
 const contacts = (state = contactsArray, { type, payload }) => {
   switch (type) {
     case ADD:
-      if (state.find(contact => contact.name === payload.name)) {
+      if (state.find(({ name }) => name === payload.name)) {
         return alert(`${payload.name} is already in contacts.`);
       } else {
         return [...state, payload];
       }
+
+    case DELETE:
+      return state.filter(({ id }) => id !== payload);
+
+    default:
+      return state;
+  }
+};
+
+const filter = (state = '', { type, payload }) => {
+  switch (type) {
+    case CHANGE_FILTER:
+      return payload;
 
     default:
       return state;
@@ -33,6 +46,7 @@ const contacts = (state = contactsArray, { type, payload }) => {
 
 export default combineReducers({
   contacts,
+  filter,
 });
 
 // export { contacts };
