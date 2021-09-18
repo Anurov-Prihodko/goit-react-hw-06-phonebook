@@ -5,8 +5,7 @@ import s from './ContactList.module.css';
 import { connect } from 'react-redux';
 import {
   deleteContact,
-  // toggleCompleted,
-  // getVisibleContacts,
+  toggleCompleted,
 } from '../../redux/phonebook/phonebook-actions';
 
 const ContactList = ({ contacts, onDeleteContact, onToggleCompleted }) => (
@@ -37,23 +36,24 @@ const ContactList = ({ contacts, onDeleteContact, onToggleCompleted }) => (
 ContactList.propTypes = {
   contacts: PropTypes.array.isRequired,
   onDeleteContact: PropTypes.func.isRequired,
-  // onToggleCompleted: PropTypes.func.isRequired,
+  onToggleCompleted: PropTypes.func.isRequired,
 };
+
+const getVisibleContacts = (allContacts, filter) => {
+  const normalizedFilter = filter.toLowerCase().trim();
+
+  return allContacts.filter(contact =>
+    contact.name.toLowerCase().includes(normalizedFilter),
+  );
+};
+
+const mapStateToProps = ({ mainState: { contacts, filter } }) => ({
+  contacts: getVisibleContacts(contacts, filter),
+});
 
 const mapDispatchToProps = dispatch => ({
   onDeleteContact: contactId => dispatch(deleteContact(contactId)),
-  onToggleCompleted: () => null,
-  // onToggleCompleted: contactId => dispatch(toggleCompleted(contactId)),
-  // contacts: dispatch(getVisibleContacts()),
+  onToggleCompleted: contactId => dispatch(toggleCompleted(contactId)),
 });
 
-const mapStateToProps = state => {
-  return {
-    contacts: state.mainState.contacts,
-    // filter: state.mainState.contactsAndFilter[0].filter,
-  };
-};
-
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
-
-// export default ContactList;

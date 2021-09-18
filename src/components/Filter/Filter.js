@@ -16,10 +16,6 @@ Filter.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-{
-  /* <Filter value={filter} onChange={changeFilter} />; */
-}
-
 const mapStateToProps = state => ({
   value: state.mainState.filter,
 });

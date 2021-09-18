@@ -7,8 +7,7 @@ import store from './redux/store';
 // import { addContact } from './redux/phonebook/phonebook-actions';
 
 // console.log(store);
-console.log(store.getState());
-
+// console.log(store.getState());
 // console.log(store.dispatch(addContact()));
 
 ReactDOM.render(

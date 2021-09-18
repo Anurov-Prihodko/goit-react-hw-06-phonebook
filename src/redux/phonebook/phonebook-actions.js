@@ -4,8 +4,6 @@ import {
   DELETE,
   TOGGLE_COMPLETED,
   CHANGE_FILTER,
-  GET_VISIBLE_CONTACTS,
-  GET_COMPLETED,
 } from './phonebook-types';
 
 const addContact = (name, number) => ({
@@ -28,14 +26,9 @@ const changeFilter = value => ({
   payload: value,
 });
 
-// const getVisibleContacts = () => ({
-//   type: GET_VISIBLE_CONTACTS,
-//   payload: '',
-// });
+const toggleCompleted = contactId => ({
+  type: TOGGLE_COMPLETED,
+  payload: contactId,
+});
 
-// const toggleCompleted = contactId => ({
-//   type: TOGGLE_COMPLETED,
-//   payload: contactId,
-// });
-
-export { addContact, deleteContact, changeFilter };
+export { addContact, deleteContact, changeFilter, toggleCompleted };

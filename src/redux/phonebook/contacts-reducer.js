@@ -4,8 +4,6 @@ import {
   DELETE,
   TOGGLE_COMPLETED,
   CHANGE_FILTER,
-  GET_VISIBLE_CONTACTS,
-  GET_COMPLETED,
 } from './phonebook-types';
 
 const contactsArray = [
@@ -21,13 +19,20 @@ const contacts = (state = contactsArray, { type, payload }) => {
   switch (type) {
     case ADD:
       if (state.find(({ name }) => name === payload.name)) {
-        return alert(`${payload.name} is already in contacts.`);
-      } else {
-        return [...state, payload];
+        alert(`${payload.name} is already in contacts.`);
+        return [...state];
       }
+      return [...state, payload];
 
     case DELETE:
       return state.filter(({ id }) => id !== payload);
+
+    case TOGGLE_COMPLETED:
+      return state.map(contact =>
+        contact.id === payload
+          ? { ...contact, completed: !contact.completed }
+          : contact,
+      );
 
     default:
       return state;
@@ -48,5 +53,3 @@ export default combineReducers({
   contacts,
   filter,
 });
-
-// export { contacts };
