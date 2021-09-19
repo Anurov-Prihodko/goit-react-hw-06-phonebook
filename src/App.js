@@ -1,12 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import ContactForm from './components/ContactForm';
 import ContactList from './components/ContactList';
 import Filter from './components/Filter';
 import s from './App.module.css';
 
-function App({ totalContactsCount, completeContactsCount }) {
+function App() {
+  const totalContactsCount = useSelector(
+    state => state.mainState.contacts.length,
+  );
+  const completeContactsCount = useSelector(state =>
+    state.mainState.contacts.reduce(
+      (acc, todo) => (todo.completed ? acc + 1 : acc),
+      0,
+    ),
+  );
+
   return (
     <div className={s.container}>
       <h1 className={s.mainTitle}>Phonebook</h1>
@@ -21,19 +30,21 @@ function App({ totalContactsCount, completeContactsCount }) {
   );
 }
 
-App.propTypes = {
-  totalContactsCount: PropTypes.number.isRequired,
-  completeContactsCount: PropTypes.number.isRequired,
-};
+export default App;
 
-const mapStateToProps = state => {
-  return {
-    totalContactsCount: state.mainState.contacts.length,
-    completeContactsCount: state.mainState.contacts.reduce(
-      (acc, todo) => (todo.completed ? acc + 1 : acc),
-      0,
-    ),
-  };
-};
+// ===== ЧЕРЕЗ CONNECT =====
 
-export default connect(mapStateToProps)(App);
+// App.propTypes = {
+//   totalContactsCount: PropTypes.number.isRequired,
+//   completeContactsCount: PropTypes.number.isRequired,
+// };
+
+// const mapStateToProps = state => {
+//   return {
+//     totalContactsCount: state.mainState.contacts.length,
+//     completeContactsCount: state.mainState.contacts.reduce(
+//       (acc, todo) => (todo.completed ? acc + 1 : acc),
+//       0,
+//     ),
+//   };
+// };
