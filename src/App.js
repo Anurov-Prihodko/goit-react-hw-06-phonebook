@@ -1,36 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import shortid from 'shortid';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ContactForm from './components/ContactForm';
 import ContactList from './components/ContactList';
 import Filter from './components/Filter';
-
 import s from './App.module.css';
 
-function App({ contacts }) {
-  // const [contacts, setContacts] = useState(
-  //   JSON.parse(localStorage.getItem('contacts')) ?? [
-  //     {
-  //       id: '',
-  //       name: '',
-  //       number: '',
-  //       completed: false,
-  //     },
-  //   ],
-  // );
-  // const [filter, setFilter] = useState('');
-
-  // useEffect(() => {
-  //   window.localStorage.setItem('contacts', JSON.stringify(contacts));
-  // }, [contacts]);
-
-  const getCompletedContactCount = () => {
-    return contacts.reduce((acc, todo) => (todo.completed ? acc + 1 : acc), 0);
-  };
-
-  const totalContactsCount = contacts.length;
-  const completeContactsCount = getCompletedContactCount();
-
+function App({ totalContactsCount, completeContactsCount }) {
   return (
     <div className={s.container}>
       <h1 className={s.mainTitle}>Phonebook</h1>
@@ -45,9 +21,18 @@ function App({ contacts }) {
   );
 }
 
+App.propTypes = {
+  totalContactsCount: PropTypes.number.isRequired,
+  completeContactsCount: PropTypes.number.isRequired,
+};
+
 const mapStateToProps = state => {
   return {
-    contacts: state.mainState.contacts,
+    totalContactsCount: state.mainState.contacts.length,
+    completeContactsCount: state.mainState.contacts.reduce(
+      (acc, todo) => (todo.completed ? acc + 1 : acc),
+      0,
+    ),
   };
 };
 

@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  addContact,
-  // getVisibleContacts,
-} from '../../redux/phonebook/phonebook-actions';
+import { addContact } from '../../redux/phonebook/phonebook-actions';
 import { connect } from 'react-redux';
 import s from './ContactForm.module.css';
 
@@ -72,7 +69,6 @@ function ContactForm({ addContact }) {
 
 const mapDispatchToProps = dispatch => ({
   addContact: (name, number) => dispatch(addContact(name, number)),
-  // getVisibleContacts: () => dispatch(getVisibleContacts()),
 });
 
 export default connect(null, mapDispatchToProps)(ContactForm);
