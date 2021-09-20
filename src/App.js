@@ -11,7 +11,7 @@ function App() {
   );
   const completeContactsCount = useSelector(state =>
     state.mainState.contacts.reduce(
-      (acc, todo) => (todo.completed ? acc + 1 : acc),
+      (acc, contacts) => (contacts.completed ? acc + 1 : acc),
       0,
     ),
   );
@@ -43,7 +43,7 @@ export default App;
 //   return {
 //     totalContactsCount: state.mainState.contacts.length,
 //     completeContactsCount: state.mainState.contacts.reduce(
-//       (acc, todo) => (todo.completed ? acc + 1 : acc),
+//       (acc, contacts) => (contacts.completed ? acc + 1 : acc),
 //       0,
 //     ),
 //   };
